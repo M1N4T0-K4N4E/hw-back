@@ -31,4 +31,10 @@ export class User extends Model {
     allowNull: false,
   })
   declare role: Role;
+
+  @Column({
+    type: DataType.JSON,
+    allowNull: true,
+  })
+  declare topics: string[];
 }

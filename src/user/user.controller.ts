@@ -27,6 +27,11 @@ export class UserController {
     return this.userService.update(+id, updateUserDto);
   }
 
+  @Post(':id/topics')
+  addTopic(@Param('id') id: string, @Body() body: { topicId: number }) {
+    return this.userService.addTopic(+id, body.topicId);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);

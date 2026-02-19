@@ -6,12 +6,16 @@ import {
   IsEnum,
   Min,
   Max,
+  IsArray,
+  IsOptional,
+  Length,
 } from 'class-validator';
 import { Role } from '../entities/user.entity';
 
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
+  @Length(2, 100)
   declare fullName: string;
 
   @IsNumber()
@@ -27,4 +31,9 @@ export class CreateUserDto {
   @IsEnum(Role)
   @IsNotEmpty()
   declare role: Role;
+
+  @IsArray()
+  @IsNumber()
+  @IsOptional()
+  declare topics?: number[];
 }

@@ -4,6 +4,11 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UserModule } from './user/user.module';
+import { TopicModule } from './topic/topic.module';
+import { TransactionModule } from './transaction/transaction.module';
+import { User } from './user/entities/user.entity';
+import { Topic } from './topic/entities/topic.entity';
+import { Transaction } from './transaction/entities/transaction.entity';
 
 @Module({
   imports: [
@@ -17,9 +22,11 @@ import { UserModule } from './user/user.module';
       database: process.env.MYSQL_DATABASE,
       synchronize: true,
       autoLoadModels: true,
-      models: [],
+      models: [User, Topic, Transaction],
     }),
     UserModule,
+    TopicModule,
+    TransactionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
