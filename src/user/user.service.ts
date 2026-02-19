@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './entities/user.entity';
 import { Topic } from '../topic/entities/topic.entity';
+import { json } from 'sequelize';
 
 @Injectable()
 export class UserService {
@@ -47,12 +48,12 @@ export class UserService {
   async addTopic(userId: number, topicId: number) {
     const user = await this.findOne(userId);
     if (!user) {
-      throw new Error('User not found');
+      return json({ error: 'User not found' });
     }
 
     const topic = await this.topicModel.findOne({ where: { id: topicId } });
     if (!topic) {
-      throw new Error('Topic not found');
+      return json({ error: 'Topic not found' });
     }
 
     const topics = user.topics || [];
